@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import { styles } from "./style";
-import { COLORS_ENUM } from "../../common/ColorsEnum";
-
-export const HomePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { styles } from './style';
+import * as Animatable from 'react-native-animatable';
+import { AntDesign } from '@expo/vector-icons';
 
 
-
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
-  const toggleCreate = () => {
-    setIsCreateOpen((prev) => !prev);
-  };
-
+export const SearchBar = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.menu}>
-        <Text style={styles.textDivider}>CLIMAPIAPP</Text>
-      </View>
-    </View>
+    <Animatable.View animation="flipInY" style={styles.container}>
+      <Animatable.View delay={1000} animation="fadeIn" style={styles.item}>
+        <Text style={styles.itemTitle}>input</Text>
+        <View>
+          <TouchableOpacity style={styles.searchButton}>
+            <AntDesign name="search1" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
+      </Animatable.View>
+    </Animatable.View>
   );
 };
