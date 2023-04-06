@@ -7,37 +7,61 @@ import { SHADOWS_ELEVATION_ENUM } from "../../common/ShadowsElevation";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: COLORS_ENUM.background,
-  },
-  menu: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  textDivider: {
-    fontSize: 18,
-    color: COLORS_ENUM.secondary_text,
-    letterSpacing: 0.01,
-    fontWeight: "bold",
-  },
-  list: {
-    flex: 1,
-    marginTop: 10,
-    marginStart: 10,
-    marginEnd: 10,
-    padding: 10,
-    backgroundColor: COLORS_ENUM.menu_color,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    shadowColor: "#000",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 8,
+    elevation: 4,
+    shadowColor: '#000',
     shadowOffset: {
-      width: SHADOWS_OFFSET_ENUM.basic_width,
-      height: SHADOWS_OFFSET_ENUM.basic_height,
+      width: 0,
+      height: 2,
     },
-    shadowRadius: SHADOWS_RADIUS_ENUM.basic,
-    shadowOpacity: SHADOWS_OPACITY_ENUM.basic,
-    elevation: SHADOWS_ELEVATION_ENUM.basic,
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
   },
-});
+  image: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    marginRight: 16,
+  },
+  content: {
+    flex: 1,
+    marginRight: 16,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  description: {
+    fontSize: 16,
+    color: '#777',
+  },
+  temperature: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+  },
+  defaultTemperature: {
+    color: '#000',
+  },
+  legalTemperature: {
+    color: '#008000',
+  },
+  quenteTemperature: {
+    color: '#ffa500',
+  },
+  frioTemperature: {
+    color: 'blue',
+    fontWeight: 'bold',
+    fontSize: 18
+  }
+} 
+  );
