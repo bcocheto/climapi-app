@@ -14,22 +14,22 @@ interface Result {
   };
 }
 
-export const SearchBar = () => {
+interface SearchBarProps {
+  setCities: React.Dispatch<React.SetStateAction<any[]>>;
+}
+
+export const SearchBar = ({setCities}:SearchBarProps) => {
   const [query, setQuery] = useState<string>('');
-  const [results, setResults] = useState<Result[]>([]);
 
   const handleSearch = async (text: string) => {
     setQuery(text);
-    const apiKey = '268bd7c8a4904a5097ca315b7abcffa0';
-    const url = `https://api.opencagedata.com/geocode/v1/json?q=${text}&key=${apiKey}&limit=10`;
+    const API_KEY = 'AIzaSyDFkMo40n9I6DlgroSWWpAWd4sgK1A5-ZI';
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${text}&key=${API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
-    setResults(data.results);
+      setCities(data.results);
   };
 
-useEffect(() => {
-  console.log(results)
-}, [results]);
 
   return (
     <Animatable.View animation="flipInY" style={styles.container}>

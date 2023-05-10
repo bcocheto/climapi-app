@@ -1,26 +1,64 @@
-import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import { styles } from "./style";
-import { COLORS_ENUM } from "../../common/ColorsEnum";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Animated,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import { styles } from './style';
+import * as Animatable from 'react-native-animatable';
 
-export const HomePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
+interface ItemProps {
+  city: any;
+  setSelectedItem: Dispatch<any>;
+  toggleModal: () => void;
+}
 
+export const CardComponent = ({
+  city,
+  setSelectedItem,
+  toggleModal,
+}: ItemProps) => {
+  const animatedScale = useRef(new Animated.Value(0)).current;
+  const [titleType, setTitleType] = useState(styles.defaultTitle);
+  const [descriptionType, setDescriptionType] = useState(
+    styles.defaultDescription
+  );
+  const [alert, setAlert] = useState<string>('');
 
+  useEffect(() => {
+    animatedScale.setValue(1);
+  }, []);
 
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
-  const toggleCreate = () => {
-    setIsCreateOpen((prev) => !prev);
-  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.menu}>
-        <Text style={styles.textDivider}>CLIMAPIAPP</Text>
-      </View>
-    </View>
+    <TouchableWithoutFeedback onPress={() => {setSelectedItem(city);
+ toggleModal()}}>
+      <Animatable.View
+        delay={500}
+        animation={'flipInX'}
+        style={styles.container}
+      >
+        <View style={styles.content}>
+          <Text numberOfLines={1} style={[styles.title, titleType]}>
+            {` ${String(city.components.town)}`}
+          </Text>
+          <Text
+            numberOfLines={2}
+            style={[styles.description, descriptionType]}
+          >
+            {`${city.components.state}`}
+          </Text>
+        </View>
+      </Animatable.View>
+    </TouchableWithoutFeedback>
   );
 };
