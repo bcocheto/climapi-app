@@ -23,7 +23,9 @@ export const styles = StyleSheet.create({
     elevation: SHADOWS_ELEVATION_ENUM.basic,
   },
   content: {
-    width: 200,
+    paddingVertical: 12,
+    paddingHorizontal:6,
+    justifyContent:'center'
   },
   image: {
     borderRadius: 100 * 0.2,

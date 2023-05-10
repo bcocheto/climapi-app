@@ -13,14 +13,14 @@ interface Weather {
 interface DetailsProps {
     isOpen: boolean;
     toggleModal: () => void;
-    lat: any;
-    long: any;
+    lat: string;
+    long: string;
     data: any;
 }
 
 export const Details = ({ isOpen, toggleModal, lat, long, data }: DetailsProps) => {
     
-const [weather, setWeather] = useState<Weather | null>(null);
+const [weather, setWeather] = useState<any>([]);
 const apiKey = 'cf8526ba8a47413319580d5dcecd29f9'; // Sua chave de acesso à API
 
 useEffect(() => {
@@ -29,6 +29,7 @@ useEffect(() => {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       const weatherData = {
         description: data.weather[0].description,
         temp: data.main.temp,
@@ -37,7 +38,7 @@ useEffect(() => {
       setWeather(weatherData);
     })
     .catch((error) => console.error(error));
-}, [lat, long]);
+}, [isOpen]);
 
     return (
       <Modal visible={isOpen} transparent>
@@ -50,31 +51,10 @@ useEffect(() => {
             >
               <View style={styles.modalHeader}>
                 <View style={styles.modalConfig}></View>
-                {/* <Text>{weather.description}</Text>
+                <Text>{weather.description}</Text>
                 <Text>{`Temperatura atual: ${weather.temp}°C`}</Text>
                 <Text>{`Sensação térmica: ${weather.feels_like}°C`}</Text>
-                <View style={styles.modalHeaderContent}></View> */}
-              </View>
-
-              <View style={styles.modalContent}>
-                <View>
-                  <Text style={styles.secondary_title}>QUANTIDADE</Text>
-                  <Text numberOfLines={1} style={styles.subTitle}>
-                    a{' '}
-                  </Text>
-                  <Text style={styles.secondary_title}>PREÇO</Text>
-                  <Text numberOfLines={1} style={styles.subTitle}>
-                    b
-                  </Text>
-                  <Text style={styles.secondary_title}>CATEGORIA</Text>
-                  <Text numberOfLines={1} style={styles.subTitle}>
-                    c
-                  </Text>
-                  <Text style={styles.secondary_title}>DESCRIÇÃO</Text>
-                  <Text numberOfLines={3} style={styles.subTitle}>
-                    d
-                  </Text>
-                </View>
+                <View style={styles.modalHeaderContent}></View>
               </View>
             </Animatable.View>
           </View>

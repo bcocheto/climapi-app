@@ -22,8 +22,8 @@ export const HomePage = () => {
 useEffect(() => {
   console.log(isModalOpen)
 }, [isModalOpen]);
-useEffect(() => {
-  console.log(cities)
+  useEffect(() => {
+// console.log('cities',cities)
 }, [cities]);
 
   return (
@@ -35,18 +35,22 @@ useEffect(() => {
       </View>
       <FlatList
         data={cities}
-        keyExtractor={(item) => item.geometry.lat + item.geometry.lng}
+        keyExtractor={(item) => item.place_id}
         renderItem={({ item }) => (
           <CardComponent
             city={item ? item : ''}
-            setSelectedItem={setSelectedItem}
+            setSelectedItem={(item) => setSelectedItem(item)}
             toggleModal={() => toggleModal()}
           />
         )}
       />
       <Details
         isOpen={isModalOpen}
-        toggleModal={() => toggleModal()} lat={undefined} long={undefined} data={undefined}      />
+        toggleModal={() => toggleModal()}
+        lat={selectedItem.lat}
+        long={selectedItem.lat}
+        data={selectedItem}
+      />
     </View>
   );
 };

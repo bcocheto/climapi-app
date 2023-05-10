@@ -40,8 +40,12 @@ export const CardComponent = ({
 
 
   return (
-    <TouchableWithoutFeedback onPress={() => {setSelectedItem(city);
- toggleModal()}}>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        setSelectedItem(city);
+        toggleModal();
+      }}
+    >
       <Animatable.View
         delay={500}
         animation={'flipInX'}
@@ -49,13 +53,7 @@ export const CardComponent = ({
       >
         <View style={styles.content}>
           <Text numberOfLines={1} style={[styles.title, titleType]}>
-            {` ${String(city.components.town)}`}
-          </Text>
-          <Text
-            numberOfLines={2}
-            style={[styles.description, descriptionType]}
-          >
-            {`${city.components.state}`}
+            {` ${String(city.formatted_address)}`}
           </Text>
         </View>
       </Animatable.View>
