@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     marginStart: 10,
     marginEnd: 10,
     padding: 10,
-    backgroundColor: COLORS_ENUM.menu_color,
+    backgroundColor: COLORS_ENUM.background,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     shadowColor: "#000",
@@ -39,5 +39,21 @@ export const styles = StyleSheet.create({
     shadowRadius: SHADOWS_RADIUS_ENUM.basic,
     shadowOpacity: SHADOWS_OPACITY_ENUM.basic,
     elevation: SHADOWS_ELEVATION_ENUM.basic,
+  },
+  button: {
+    width: 100,
+    height: 30,
+    borderRadius: 5,
+    backgroundColor: COLORS_ENUM.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 5,
+    marginStart: 5
+  },
+
+  buttonText: {
+    color: COLORS_ENUM.secondary_text,
+    fontWeight: 'bold',
+    fontSize: 10
   },
 });
