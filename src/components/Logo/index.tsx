@@ -1,11 +1,28 @@
-import React, { memo } from 'react';
-import { Image, StyleSheet } from "react-native";
+import React, {Component, memo} from 'react';
+import {Image, StyleSheet, View} from "react-native";
+import * as Animatable from 'react-native-animatable';
 
-const Logo = () => (
-    <Image source={require('../../../assets/logo-login.png')} style={styles.image} />
-);
+class Logo extends Component {
+    render() {
+        return (
+            <View>
+                <Animatable.Text
+                    animation="slideInRight"
+                    duration={3000}
+                    style={styles.animatableText}
+                >
+                    <Image source={require('../../../assets/logo-login.png')} style={styles.image} />
+                </Animatable.Text>
+            </View>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
+    animatableText: {
+        fontSize: 100,
+        fontWeight: 'bold'
+    },
     image: {
         width: 200,
         height: 200,

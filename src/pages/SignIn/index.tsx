@@ -6,6 +6,7 @@ import {styles} from "./style";
 import {COLORS_ENUM} from "../../common/ColorsEnum";
 import Logo from "../../components/Logo";
 import {usernameValidator, passwordValidator} from '../../common/utils/utils';
+import * as Animatable from "react-native-animatable";
 
 const SignIn: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -30,7 +31,14 @@ const SignIn: React.FC = () => {
     return (
         <View style={styles.container}>
             <Logo/>
-            <Text style={styles.textLogin}>Welcome back ;)</Text>
+            <Animatable.Text
+                animation="slideInLeft"
+                duration={3000}
+                style={styles.animatableText}
+            >
+                <Text>Welcome back ;)</Text>
+            </Animatable.Text>
+
             <TextInput style={styles.input}
                        selectionColor={COLORS_ENUM.primary_text}
                        underlineColorAndroid="transparent"

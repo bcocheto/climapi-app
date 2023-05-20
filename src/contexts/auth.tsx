@@ -2,7 +2,6 @@ import React, {createContext, useState, PropsWithChildren, useEffect, useContext
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 import * as auth from "../services/auth";
-import {ActivityIndicator, View} from "react-native";
 
 interface User {
     username: string;
@@ -12,7 +11,6 @@ interface User {
 interface AuthContextData {
     signed: boolean;
     user: User | null;
-    loading: boolean;
     signIn(): Promise<void>;
     signOut(): void;
 }
@@ -25,7 +23,6 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC<PropsWithChildren<Props>> = ({children}) => {
     const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
@@ -39,7 +36,6 @@ const AuthProvider: React.FC<PropsWithChildren<Props>> = ({children}) => {
                 setUser(JSON.parse(storagedUser));
                 api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
             }
-            setLoading(false);
         }
         loadStoragedData();
     });
@@ -60,16 +56,8 @@ const AuthProvider: React.FC<PropsWithChildren<Props>> = ({children}) => {
         });
     }
 
-    if (loading) {
-        return (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <ActivityIndicator size="large" color="#666" />
-            </View>
-        );
-    }
-
     return (
-        <AuthContext.Provider value={{signed: !!user, user, loading, signIn, signOut}}>
+        <AuthContext.Provider value={{signed: !!user, user,  signIn, signOut}}>
             {children}
         </AuthContext.Provider>
     );

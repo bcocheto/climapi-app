@@ -7,13 +7,6 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    textLogin: {
-        fontSize: 26,
-        fontWeight: 'bold',
-        paddingVertical: 10,
-        marginBottom: 10,
-        color: COLORS_ENUM.primary_text,
-    },
     input: {
         width: 300,
         borderWidth: 1,
@@ -53,5 +46,12 @@ export const styles = StyleSheet.create({
         color: COLORS_ENUM.primary_error,
         marginTop: 4,
         marginBottom: 4
+    },
+    animatableText: {
+        fontWeight: 'bold',
+        fontSize: 26,
+        paddingVertical: 10,
+        marginBottom: 10,
+        color: COLORS_ENUM.primary_text,
     },
 });
