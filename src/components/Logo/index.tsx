@@ -7,8 +7,8 @@ class Logo extends Component {
         return (
             <View>
                 <Animatable.Text
-                    animation="slideInRight"
-                    duration={3000}
+                    animation="flash"
+                    duration={4000}
                     style={styles.animatableText}
                 >
                     <Image source={require('../../../assets/logo-login.png')} style={styles.image} />
@@ -21,12 +21,12 @@ class Logo extends Component {
 const styles = StyleSheet.create({
     animatableText: {
         fontSize: 100,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom: 20
     },
     image: {
         width: 200,
         height: 200,
-        marginBottom: 8
     },
 });
 

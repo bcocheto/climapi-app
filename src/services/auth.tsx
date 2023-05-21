@@ -1,21 +1,19 @@
-interface Response {
-    token: string;
-    user: {
-        username: string;
-        password: string;
-    };
-}
+import {AuthData} from '../contexts/auth';
 
-export function signIn(): Promise<Response> {
-    return new Promise((resolve) => {
+export function signIn(username: string, password: string): Promise<AuthData> {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve({
-                token: 'eiwoe2dksao2dada21jdjadaoda9kdqof',
-                user: {
+            if (username == 'Gabi' && password == '123456') {
+                resolve({
+                    token: JWTTokenMock,
                     username: 'Gabi',
-                    password: '12345',
-                },
-            });
+                    password: '123456',
+                });
+            } else {
+                reject(new Error('Username or password incorrects'))
+            }
         }, 2000);
     });
 }
+
+const JWTTokenMock = 'eiwoe2dksao2dada21jdjadaoda9kdqof';

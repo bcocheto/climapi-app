@@ -24,7 +24,7 @@ const SignIn: React.FC = () => {
             setPasswordError(passwordError);
             return;
         } else {
-            signIn();
+            signIn(username, password);
         }
     }
 
@@ -68,6 +68,5 @@ const SignIn: React.FC = () => {
         </View>
     );
 };
-
 
 export default SignIn;

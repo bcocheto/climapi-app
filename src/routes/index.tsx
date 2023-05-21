@@ -5,9 +5,10 @@ import AuthRoutes from "./auth.routes";
 import AppRoutes from "./app.routes";
 
 const Routes: React.FC = () => {
-    const { signed } = useAuth();
+    const { authData} = useAuth();
 
-    return signed ? <AppRoutes /> : <AuthRoutes />;
+    return authData ? <AppRoutes /> : <AuthRoutes />;
+
 };
 
 

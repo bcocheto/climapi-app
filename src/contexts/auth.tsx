@@ -1,69 +1,72 @@
 import React, {createContext, useState, PropsWithChildren, useEffect, useContext} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import api from '../services/api';
-import * as auth from "../services/auth";
+import * as authService from "../services/auth";
+import {Alert} from "react-native";
 
-interface User {
+export interface AuthData {
+    token: string;
     username: string;
     password: string;
 }
 
 interface AuthContextData {
-    signed: boolean;
-    user: User | null;
-    signIn(): Promise<void>;
-    signOut(): void;
+    authData?: AuthData;
+    signIn: (username: string, password: string) => Promise<void>;
+    signOut: () => Promise<void>;
+    isLoading: boolean;
 }
+
+const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 interface Props {
     children: React.ReactNode;
 }
 
-const AuthContext = createContext<AuthContextData>({} as AuthContextData);
-
-const AuthProvider: React.FC<PropsWithChildren<Props>> = ({children}) => {
-    const [user, setUser] = useState<User | null>(null);
+export const AuthProvider: React.FC<PropsWithChildren<Props>> = ({children}) => {
+    const [authData, setAuthData] = useState<AuthData>();
+    const [isLoading, setisLoading] = useState(true);
 
     useEffect(() => {
-
-        async function loadStoragedData() {
-            const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
-            const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
-
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-
-            if (storagedUser && storagedToken) {
-                setUser(JSON.parse(storagedUser));
-                api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
-            }
-        }
         loadStoragedData();
-    });
+    }, []);
 
-    async function signIn() {
-        const response = await auth.signIn();
-        setUser(response.user);
+    async function loadStoragedData(): Promise<void> {
+        try {
+            const authDataSerialized = await AsyncStorage.getItem('@AuthData');
+            if (authDataSerialized) {
+                const _authData: AuthData = (JSON.parse(authDataSerialized));
+                setAuthData(_authData);
+            }
+        } catch (e) {
 
-        api.defaults.headers.Authorization = `Baerer ${response.token}`;
-
-        await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.user));
-        await AsyncStorage.setItem('@RNAuth:token', response.token);
+        } finally {
+            setisLoading(false);
+        }
     }
 
-    function signOut() {
-        AsyncStorage.clear().then(() => {
-            setUser(null);
-        });
+    async function signIn(username: string, password: string) {
+        try {
+            const authData = await authService.signIn(username, password);
+            setAuthData(authData);
+            AsyncStorage.setItem('@AuthData', JSON.stringify(authData))
+        } catch (error) {
+            Alert.alert(error.message, "Please try again")
+        }
+    }
+
+    async function signOut() {
+        setAuthData(undefined);
+        AsyncStorage.removeItem('@AuthData');
     }
 
     return (
-        <AuthContext.Provider value={{signed: !!user, user,  signIn, signOut}}>
+        <AuthContext.Provider value={{authData, signIn, signOut, isLoading}}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-function useAuth() {
+export function useAuth(): AuthContextData {
     const context = useContext(AuthContext);
 
     if (!context) {
@@ -71,5 +74,3 @@ function useAuth() {
     }
     return context;
 }
-
-export {AuthProvider, useAuth};
