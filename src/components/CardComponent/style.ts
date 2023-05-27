@@ -46,22 +46,4 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     width: 190,
   },
-  ballanceTitle: {
-    color: COLORS_ENUM.primary_error,
-  },
-  ballanceDescription: {
-    color: COLORS_ENUM.secondary_error,
-  },
-  warningTitle: {
-    color: COLORS_ENUM.primary_warning,
-  },
-  warningDescription: {
-    color: COLORS_ENUM.secondary_warning,
-  },
-  defaultTitle: {
-    color: COLORS_ENUM.primary_text,
-  },
-  defaultDescription: {
-    color: COLORS_ENUM.secondary_text,
-  },
 });

@@ -12,7 +12,6 @@ export const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cities, setCities] = useState<any[]>([]);
   const [selectedItem, setSelectedItem] = useState<any>([]);
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen((prev) => !prev);
@@ -47,8 +46,6 @@ useEffect(() => {
       <Details
         isOpen={isModalOpen}
         toggleModal={() => toggleModal()}
-        lat={selectedItem.lat}
-        long={selectedItem.lat}
         data={selectedItem}
       />
     </View>
