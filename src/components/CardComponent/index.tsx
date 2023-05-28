@@ -28,10 +28,6 @@ export const CardComponent = ({
   toggleModal,
 }: ItemProps) => {
   const animatedScale = useRef(new Animated.Value(0)).current;
-  const [titleType, setTitleType] = useState(styles.defaultTitle);
-  const [descriptionType, setDescriptionType] = useState(
-    styles.defaultDescription
-  );
   const [alert, setAlert] = useState<string>('');
 
   useEffect(() => {
@@ -52,7 +48,7 @@ export const CardComponent = ({
         style={styles.container}
       >
         <View style={styles.content}>
-          <Text numberOfLines={1} style={[styles.title, titleType]}>
+          <Text numberOfLines={1} style={styles.title}>
             {` ${String(city.formatted_address)}`}
           </Text>
         </View>

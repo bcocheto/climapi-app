@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 40,
     fontWeight: 'bold',
-    color: COLORS_ENUM.primary_light,
+    color: COLORS_ENUM.primary_text,
   },
   searchButton: {
     height: BUTTON_SIZE_ENUM.aux,

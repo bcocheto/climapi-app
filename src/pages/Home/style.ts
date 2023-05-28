@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
   textDivider: {
     fontSize: 18,
-    color: COLORS_ENUM.secondary_text,
+    color: "#C0C0C0",
     letterSpacing: 0.01,
     fontWeight: "bold",
   },

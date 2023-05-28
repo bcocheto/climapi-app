@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { View, TouchableOpacity, Text, FlatList } from 'react-native';
 import { styles } from './style';
+import { COLORS_ENUM } from '../../common/ColorsEnum';
 import { HeaderComponent } from '../../components/Header';
 import { SearchBar } from '../../components/SearchBarComponent';
 import { CardComponent } from '../../components/CardComponent';
@@ -38,7 +39,7 @@ useEffect(() => {
         </TouchableOpacity>
 
       <HeaderComponent />
-        <SearchBar setCities={setCities} />
+      <SearchBar setCities={setCities} />
       <View style={styles.menu}>
         <Text style={styles.textDivider}>CLIMAPIAPP</Text>
       </View>
@@ -56,8 +57,6 @@ useEffect(() => {
       <Details
         isOpen={isModalOpen}
         toggleModal={() => toggleModal()}
-        lat={selectedItem.lat}
-        long={selectedItem.lat}
         data={selectedItem}
       />
     </View>
