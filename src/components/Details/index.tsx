@@ -94,8 +94,8 @@ export const Details = ({ isOpen, toggleModal, data }: DetailsProps) => {
               <View style={styles.modalHeaderContent}>
                 <Text style={styles.title}>{weather.description}</Text>
                 <Text
-                  style={styles.subTitle}
-                >{`Temperatura atual: ${weather.temp}°C`}</Text>
+                  style={styles.temp}
+                >{`${weather.temp}°C`}</Text>
                 <Text
                   style={styles.subTitle}
                 >{`Sensação térmica: ${weather.feels_like}°C`}</Text>

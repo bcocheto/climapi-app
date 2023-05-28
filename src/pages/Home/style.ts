@@ -40,20 +40,17 @@ export const styles = StyleSheet.create({
     shadowOpacity: SHADOWS_OPACITY_ENUM.basic,
     elevation: SHADOWS_ELEVATION_ENUM.basic,
   },
-  button: {
-    width: 100,
-    height: 30,
-    borderRadius: 5,
-    backgroundColor: COLORS_ENUM.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 5,
-    marginStart: 5
+  favoriteText: {
+    fontSize: 16,
+    marginLeft: 16,
+    paddingBottom: 20,
+    fontWeight: '700',
   },
-
-  buttonText: {
-    color: COLORS_ENUM.secondary_text,
-    fontWeight: 'bold',
-    fontSize: 10
+  favoriteIcon: {
+    paddingTop: 10,
   },
+  textFavorite: {
+    fontSize: 16,
+    paddingBottom: 20
+  }
 });

@@ -3,10 +3,10 @@ import {AuthData} from '../contexts/auth';
 export function signIn(username: string, password: string): Promise<AuthData> {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (username == 'Gabi' && password == '123456') {
+            if (username == 'admin' && password == '123456') {
                 resolve({
                     token: JWTTokenMock,
-                    username: 'Gabi',
+                    username: 'admin',
                     password: '123456',
                 });
             } else {

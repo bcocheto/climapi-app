@@ -46,4 +46,11 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     width: 190,
   },
+  favorite: {
+    paddingTop: 10,
+  },
+  textFavorite: {
+    fontSize: 16,
+    paddingBottom: 20
+  }
 });

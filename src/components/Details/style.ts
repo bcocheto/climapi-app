@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   modalContentWrapper: {
     flex: 1,
     top: '30%',
-    backgroundColor: 'white',
+    backgroundColor: COLORS_ENUM.primary,
     margin: 16,
     borderRadius: 50,
     shadowColor: '#000',
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   modalHeader: {
     flexDirection: 'column',
-    backgroundColor: COLORS_ENUM.primary,
+    backgroundColor: COLORS_ENUM.background,
     padding: 32,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 1,
+    backgroundColor: COLORS_ENUM.primary
   },
   modalConfig: {
     flexDirection: 'row',
@@ -45,24 +46,29 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    lineHeight: 24,
-    letterSpacing: -0.5,
+    paddingBottom: 10,
     fontWeight: 'bold',
-    color: COLORS_ENUM.primary_light,
+    color: COLORS_ENUM.primary,
   },
   secondary_title: {
     fontSize: 14,
     fontWeight: '500',
     lineHeight: 18,
     letterSpacing: -0.5,
-    color: COLORS_ENUM.primary_text,
+    color: COLORS_ENUM.primary_light,
   },
   subTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '400',
     lineHeight: 20,
     letterSpacing: -0.2,
-    color: '#FAFAFA',
+    color: COLORS_ENUM.primary_dark,
+    marginBottom: 5,
+  },
+  temp: {
+    fontSize: 25,
+    fontWeight: '400',
+    color: COLORS_ENUM.primary_dark,
     marginBottom: 5,
   },
   map: {

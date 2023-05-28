@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     input: {
         width: 300,
         borderWidth: 1,
-        borderColor: COLORS_ENUM.primary_light,
+        borderColor: COLORS_ENUM.primary,
         borderRadius: 8,
         marginBottom: 8,
         marginTop: 4,
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
         marginTop: 8
     },
     label: {
-        color: COLORS_ENUM.primary_text
+        color: COLORS_ENUM.primary_dark
     },
     error: {
         fontSize: 14,
@@ -52,6 +52,6 @@ export const styles = StyleSheet.create({
         fontSize: 26,
         paddingVertical: 10,
         marginBottom: 20,
-        color: COLORS_ENUM.primary_text,
+        color: COLORS_ENUM.primary_dark,
     },
 });

@@ -1,5 +1,5 @@
 import React, {createContext, useState, PropsWithChildren, useEffect, useContext} from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as authService from "../services/auth";
 import {Alert} from "react-native";
 

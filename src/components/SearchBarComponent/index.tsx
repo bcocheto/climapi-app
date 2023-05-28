@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { TextInput} from 'react-native';
 import { styles } from './style';
 import * as Animatable from 'react-native-animatable';
-import { AntDesign } from '@expo/vector-icons';
 
 interface Result {
   components: {
