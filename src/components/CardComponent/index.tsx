@@ -1,6 +1,5 @@
 import React, {
   Dispatch,
-  SetStateAction,
   useEffect,
   useRef,
   useState,
@@ -9,12 +8,14 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   Animated,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { styles } from './style';
 import * as Animatable from 'react-native-animatable';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface ItemProps {
   city: any;
@@ -30,10 +31,28 @@ export const CardComponent = ({
   const animatedScale = useRef(new Animated.Value(0)).current;
   const [alert, setAlert] = useState<string>('');
 
+  const saveCityToFavorites = async (city: any) => {
+    try {
+      const favorites = await AsyncStorage.getItem('favorites');
+      let favoritesArray = [];
+
+      if (favorites) {
+        favoritesArray = JSON.parse(favorites);
+      }
+      favoritesArray.push(city);
+      await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
+      console.log('City saved to favorites!');
+    } catch (error) {
+      console.log('Error saving city to favorites:', error);
+    }
+  };
+  const addToFavorites = () => {
+    saveCityToFavorites(city);
+  };
+
   useEffect(() => {
     animatedScale.setValue(1);
   }, []);
-
 
   return (
     <TouchableWithoutFeedback
@@ -51,6 +70,10 @@ export const CardComponent = ({
           <Text numberOfLines={1} style={styles.title}>
             {` ${String(city.formatted_address)}`}
           </Text>
+
+          <TouchableOpacity onPress={addToFavorites} style={styles.favorite}>
+            <Text style={styles.textFavorite}> <Icon name="favorite" size={20} color="red"/>Favoritar</Text>
+          </TouchableOpacity>
         </View>
       </Animatable.View>
     </TouchableWithoutFeedback>

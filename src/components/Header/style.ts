@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
   container: {
     textAlign: 'center',
     backgroundColor: COLORS_ENUM.primary_dark,
-    paddingTop: STATUS_BAR_HEIGHT,
     flexDirection: 'row',
     elevation: 5,
   },
@@ -50,5 +49,5 @@ export const styles = StyleSheet.create({
     shadowRadius: SHADOWS_RADIUS_ENUM.basic,
     shadowOpacity: SHADOWS_OPACITY_ENUM.basic,
     elevation: SHADOWS_ELEVATION_ENUM.basic,
-  },
+  }
 });
