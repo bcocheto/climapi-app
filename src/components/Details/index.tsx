@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome'; // Importe o pacote de ícones
+import { FontAwesome } from '@expo/vector-icons';
 import {
   Modal,
   Text,
@@ -38,6 +40,7 @@ export const Details = ({ isOpen, toggleModal, data }: DetailsProps) => {
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);
   const apiKey = 'cf8526ba8a47413319580d5dcecd29f9'; // Sua chave de acesso à API
+  const [weatherIcon, setWeatherIcon] = useState<string>(''); // Estado para o ícone do clima
 
   useEffect(() => {
     if (data?.geometry?.location) {
@@ -65,6 +68,23 @@ export const Details = ({ isOpen, toggleModal, data }: DetailsProps) => {
             pressure: data.main.pressure,
           };
           setWeather(weatherData);
+          // Mapeamento do código de ícone para o ícone correspondente
+          switch (data.weather[0].icon) {
+            case '01d':
+              setWeatherIcon('sun-o');
+              break;
+            case '01n':
+              setWeatherIcon('moon-o');
+              break;
+            case '02d':
+            case '02n':
+              setWeatherIcon('cloud');
+              break;
+            // Adicione mais casos conforme necessário para os outros códigos de ícone
+            default:
+              setWeatherIcon('question-circle');
+              break;
+          }
         })
         .catch((error) => console.error(error))
         .finally(() => setIsLoading(false));
@@ -92,10 +112,11 @@ export const Details = ({ isOpen, toggleModal, data }: DetailsProps) => {
           >
             <View style={styles.modalHeader}>
               <View style={styles.modalHeaderContent}>
+                <View style={styles.row}>
                 <Text style={styles.title}>{weather.description}</Text>
-                <Text
-                  style={styles.temp}
-                >{`${weather.temp}°C`}</Text>
+                <Icon name={weatherIcon} size={30} color="black" />
+                </View>
+                <Text style={styles.temp}>{`${weather.temp}°C`}</Text>
                 <Text
                   style={styles.subTitle}
                 >{`Sensação térmica: ${weather.feels_like}°C`}</Text>

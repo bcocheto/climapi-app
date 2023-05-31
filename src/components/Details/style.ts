@@ -50,6 +50,13 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: COLORS_ENUM.primary,
   },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width:"100%"
+  },
   secondary_title: {
     fontSize: 14,
     fontWeight: '500',
