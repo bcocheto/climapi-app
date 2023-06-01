@@ -1,26 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import { styles } from "./style";
-import { COLORS_ENUM } from "../../common/ColorsEnum";
+import React, { useEffect, useState } from 'react';
+import { TextInput} from 'react-native';
+import { styles } from './style';
+import * as Animatable from 'react-native-animatable';
 
-export const HomePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
-
-
-
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
+interface Result {
+  components: {
+    city: string;
   };
-  const toggleCreate = () => {
-    setIsCreateOpen((prev) => !prev);
+  geometry: {
+    lat: number;
+    lng: number;
   };
+}
+
+interface SearchBarProps {
+  setCities: React.Dispatch<React.SetStateAction<any[]>>;
+}
+
+export const SearchBar = ({setCities}:SearchBarProps) => {
+  const [query, setQuery] = useState<string>('');
+  const API_KEY = 'AIzaSyDFkMo40n9I6DlgroSWWpAWd4sgK1A5-ZI';
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${API_KEY}`;
+
+  const handleSearch = async () => {
+        if (query.trim() !== '') {
+          const response = await fetch(url);
+          const data = await response.json();
+          setCities(data.results);
+        } else {
+          setCities([]);
+        }
+  };
+  
+  useEffect(() => {
+    handleSearch();
+  }, [query]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.menu}>
-        <Text style={styles.textDivider}>CLIMAPIAPP</Text>
-      </View>
-    </View>
+    <Animatable.View animation="flipInY" style={styles.container}>
+      <Animatable.View delay={1000} animation="fadeIn" >
+        <TextInput
+          placeholder="Digite o nome da cidade"
+          value={query}
+          onChangeText={setQuery}
+        />
+      </Animatable.View>
+    </Animatable.View>
   );
 };

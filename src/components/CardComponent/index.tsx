@@ -1,26 +1,81 @@
-import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import { styles } from "./style";
-import { COLORS_ENUM } from "../../common/ColorsEnum";
+import React, {
+  Dispatch,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Animated,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import { styles } from './style';
+import * as Animatable from 'react-native-animatable';
 
-export const HomePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
+interface ItemProps {
+  city: any;
+  setSelectedItem: Dispatch<any>;
+  toggleModal: () => void;
+}
 
+export const CardComponent = ({
+  city,
+  setSelectedItem,
+  toggleModal,
+}: ItemProps) => {
+  const animatedScale = useRef(new Animated.Value(0)).current;
+  const [alert, setAlert] = useState<string>('');
 
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
+  const saveCityToFavorites = async (city: any) => {
+    try {
+      const favorites = await AsyncStorage.getItem('favorites');
+      let favoritesArray = [];
+
+      if (favorites) {
+        favoritesArray = JSON.parse(favorites);
+      }
+      favoritesArray.push(city);
+      await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
+      console.log('City saved to favorites!');
+    } catch (error) {
+      console.log('Error saving city to favorites:', error);
+    }
   };
-  const toggleCreate = () => {
-    setIsCreateOpen((prev) => !prev);
+  const addToFavorites = () => {
+    saveCityToFavorites(city);
   };
+
+  useEffect(() => {
+    animatedScale.setValue(1);
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.menu}>
-        <Text style={styles.textDivider}>CLIMAPIAPP</Text>
-      </View>
-    </View>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        setSelectedItem(city);
+        toggleModal();
+      }}
+    >
+      <Animatable.View
+        delay={500}
+        animation={'flipInX'}
+        style={styles.container}
+      >
+        <View style={styles.content}>
+          <Text numberOfLines={1} style={styles.title}>
+            {` ${String(city.formatted_address)}`}
+          </Text>
+
+          <TouchableOpacity onPress={addToFavorites} style={styles.favorite}>
+            <Text style={styles.textFavorite}> <Icon name="favorite" size={20} color="red"/>Favoritar</Text>
+          </TouchableOpacity>
+        </View>
+      </Animatable.View>
+    </TouchableWithoutFeedback>
   );
 };

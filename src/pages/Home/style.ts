@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
   textDivider: {
     fontSize: 18,
-    color: COLORS_ENUM.secondary_text,
+    color: "#C0C0C0",
     letterSpacing: 0.01,
     fontWeight: "bold",
   },
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     marginStart: 10,
     marginEnd: 10,
     padding: 10,
-    backgroundColor: COLORS_ENUM.menu_color,
+    backgroundColor: COLORS_ENUM.background,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     shadowColor: "#000",
@@ -40,4 +40,17 @@ export const styles = StyleSheet.create({
     shadowOpacity: SHADOWS_OPACITY_ENUM.basic,
     elevation: SHADOWS_ELEVATION_ENUM.basic,
   },
+  favoriteText: {
+    fontSize: 16,
+    marginLeft: 16,
+    paddingBottom: 20,
+    fontWeight: '700',
+  },
+  favoriteIcon: {
+    paddingTop: 10,
+  },
+  textFavorite: {
+    fontSize: 16,
+    paddingBottom: 20
+  }
 });
